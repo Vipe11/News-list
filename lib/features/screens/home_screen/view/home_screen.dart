@@ -1,48 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_list/features/bloc/theme_cubit/theme_cubit.dart';
 import 'package:news_list/features/screens/new_screen/new_screen.dart';
+import 'package:news_list/features/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var themeCubit = context.watch<ThemeCubit>();
-    IconData setIconTheme(String theme) {
-      switch (themeCubit.state.theme) {
-        case 'dark':
-          return Icons.brightness_3_sharp;
-        case 'light':
-          return Icons.brightness_high;
-        default:
-          return Icons.brightness_4;
-      }
-    }
-
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
           centerTitle: true,
           title: const Text('News List'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                switch (themeCubit.state.theme) {
-                  case 'system':
-                    themeCubit.setTheme('dark');
-                    break;
-                  case 'dark':
-                    themeCubit.setTheme('light');
-                    break;
-                  case 'light':
-                    themeCubit.setTheme('system');
-                    break;
-                }
-              },
-              icon: Icon(setIconTheme(themeCubit.state.theme)),
-            ),
+          actions: const [
+            ChangeButtonTheme(),
           ],
           // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),

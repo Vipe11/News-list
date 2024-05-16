@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_list/features/widgets/widgets.dart';
 
 class NewScreen extends StatelessWidget {
   const NewScreen({super.key});
@@ -10,11 +11,8 @@ class NewScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Travel'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.brightness_4),
-          ),
+        actions: const [
+          ChangeButtonTheme(),
         ],
       ),
       body: ListView(
