@@ -14,6 +14,7 @@ class NewsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var time = DateTime.parse(news.publishedDate);
+    const String emptyImage = 'assets/emptyImage.png';
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
@@ -33,7 +34,9 @@ class NewsContainer extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             NewsContainerImage(
-              image: news.multimedia[2]['url'],
+              image: news.multimedia.isEmpty
+                  ? const AssetImage(emptyImage)
+                  : NetworkImage(news.multimedia[2]['url']),
             ),
             Padding(
               padding: const EdgeInsets.all(10),

@@ -6,7 +6,7 @@ class NewsContainerImage extends StatelessWidget {
     required this.image,
   });
 
-  final String image;
+  final ImageProvider<Object> image;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,7 @@ class NewsContainerImage extends StatelessWidget {
         ),
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: NetworkImage(
-            image,
-          ),
+          image: image,
         ),
       ),
     );

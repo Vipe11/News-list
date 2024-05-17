@@ -23,8 +23,6 @@ class NewsRepository implements InterfaceNewsRepository {
 
     final newsList = [for (var i in dataResults) News.fromJson(i)];
 
-    debugPrint(newsList.toString());
-
     return (newsList);
   }
 }

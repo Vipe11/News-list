@@ -35,12 +35,14 @@ class NewScreen extends StatelessWidget {
             news.abstract,
             style: theme.textTheme.bodyLarge,
           ),
-          const SizedBox(height: 20),
-          Image.network(
-            width: double.infinity,
-            fit: BoxFit.fill,
-            news.multimedia[2]['url'],
-          ),
+          if (news.multimedia.isNotEmpty) ...[
+            const SizedBox(height: 20),
+            Image.network(
+              width: double.infinity,
+              fit: BoxFit.fill,
+              news.multimedia[2]['url'],
+            ),
+          ],
           const SizedBox(height: 20),
           Text('Source: ${news.source}'),
           Text(
