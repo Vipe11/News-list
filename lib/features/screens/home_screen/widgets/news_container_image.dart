@@ -19,7 +19,7 @@ class NewsContainerImage extends StatelessWidget {
           topRight: Radius.circular(16),
         ),
         image: DecorationImage(
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           image: image,
         ),
       ),

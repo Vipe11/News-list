@@ -23,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final bloc = context.read<NewsListBloc>();
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        scrolledUnderElevation: 0,
         centerTitle: true,
         title: const Text('News List'),
         actions: const [
@@ -39,8 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
             initial: () => const Center(
               child: Text('Not init...'),
             ),
-            loading: () => const Center(
-              child: CircularProgressIndicator(),
+            loading: () => ListView.separated(
+              padding: const EdgeInsets.all(20),
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 10,
+              ),
+              itemBuilder: (context, index) => const NewsContainerShimmer(),
+              itemCount: 5,
             ),
             loaded: (newsList) {
               return ListView.separated(
