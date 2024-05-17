@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:news_list/features/widgets/widgets.dart';
+import 'package:news_list/repositories/models/news.dart';
 
 class NewScreen extends StatelessWidget {
-  const NewScreen({super.key});
+  const NewScreen({
+    super.key,
+    required this.news,
+  });
+
+  final News news;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final timeParse = DateTime.parse(news.publishedDate);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Travel'),
+        title: Text(news.section),
         centerTitle: true,
         actions: const [
           ChangeButtonTheme(),
@@ -20,20 +27,24 @@ class NewScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         children: [
           Text(
-            'What the F.A.A. Bill Means for Travelers',
+            news.title,
             style: theme.textTheme.headlineMedium,
           ),
           const SizedBox(height: 10),
           Text(
-            'New chatbot technology can talk, laugh and sing like a human. What comes next is anyone’s guess.',
+            news.abstract,
             style: theme.textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),
           Image.network(
             width: double.infinity,
             fit: BoxFit.fill,
-            'https://static01.nyt.com/images/2024/05/14/multimedia/14travel-faa-glpc/14travel-faa-glpc-articleInline.jpg',
+            news.multimedia[2]['url'],
           ),
+          const SizedBox(height: 20),
+          Text('Source: ${news.source}'),
+          Text(
+              'Was published: ${timeParse.day}.${timeParse.month}.${timeParse.year}')
         ],
       ),
     );

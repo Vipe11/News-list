@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:news_list/features/screens/home_screen/widgets/widgets.dart';
 import 'package:news_list/features/screens/new_screen/new_screen.dart';
+import 'package:news_list/repositories/models/news.dart';
 
 class NewsContainer extends StatelessWidget {
   const NewsContainer({
     super.key,
+    required this.news,
   });
+
+  final News news;
 
   @override
   Widget build(BuildContext context) {
-    var time = DateTime.parse('2024-05-14T11:33:19-04:00');
+    var time = DateTime.parse(news.publishedDate);
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const NewScreen(),
+          builder: (context) => NewScreen(
+            news: news,
+          ),
         ));
       },
       child: Container(
@@ -26,16 +32,16 @@ class NewsContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const NewsContainerImage(
-              image:
-                  'https://static01.nyt.com/images/2024/05/14/multimedia/14travel-faa-glpc/14travel-faa-glpc-articleInline.jpg',
+            NewsContainerImage(
+              image: news.multimedia[2]['url'],
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'What the F.A.A. Bill Means for Travelers',
+                    news.title,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 20),
