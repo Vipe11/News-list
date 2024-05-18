@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/features/screens/home_screen/bloc/bloc/news_list_bloc.dart';
@@ -24,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        leading: const SearchButton(),
         title: const Text('News List'),
         actions: const [
           ChangeButtonTheme(),
@@ -46,17 +49,26 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: 5,
             ),
             loaded: (newsList) {
-              return ListView.separated(
-                padding: const EdgeInsets.all(20),
-                itemBuilder: (context, index) => NewsContainer(
-                  news: newsList[index],
+              return RefreshIndicator(
+                onRefresh: () async {
+                  final completer = Completer();
+                  context
+                      .read<NewsListBloc>()
+                      .add(NewsListEvent.started(completer: completer));
+                  return completer.future;
+                },
+                child: ListView.separated(
+                  padding: const EdgeInsets.all(20),
+                  itemBuilder: (context, index) => NewsContainer(
+                    news: newsList[index],
+                  ),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                  itemCount: newsList.length,
                 ),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-                itemCount: newsList.length,
               );
             },
-            error: () => const ErrorLoadingView(),
+            error: (e) => ErrorLoadingView(e: e),
           );
         },
       ),

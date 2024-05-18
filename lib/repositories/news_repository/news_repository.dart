@@ -23,6 +23,20 @@ class NewsRepository implements InterfaceNewsRepository {
 
     final newsList = [for (var i in dataResults) News.fromJson(i)];
 
-    return (newsList);
+    return newsList;
+  }
+
+  @override
+  Future<List<News>> getNewsAboutTags({required String tag}) async {
+    final response = await dio.get('$host/nyt/$tag.json?api-key=$apiKey');
+
+    debugPrint('Запрос c тегом $tag отправлен...');
+
+    final data = response.data;
+    final dataResults = data['results'] as List<dynamic>;
+
+    final newsList = [for (var i in dataResults) News.fromJson(i)];
+
+    return newsList;
   }
 }

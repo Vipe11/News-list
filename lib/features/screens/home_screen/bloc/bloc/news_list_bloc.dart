@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:news_list/repositories/models/news.dart';
@@ -10,19 +13,33 @@ part 'news_list_state.dart';
 
 class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
   NewsListBloc(this.newsRepository) : super(const _Initial()) {
-    on<_Started>((event, emit) async {
-      if (state is! _Loaded) {
-        emit(const _Loading());
-      }
+    on<_Started>(_startApp);
+    on<_SearchFromTag>(_serchFromTagApp);
+  }
 
-      try {
-        var newsList = await newsRepository.getNewsList();
-        emit(_Loaded(newsList: newsList));
-      } catch (e) {
-        debugPrint(e.toString());
-        emit(const _Error());
-      }
-    });
+  _serchFromTagApp(_SearchFromTag event, Emitter<NewsListState> emit) async {
+    emit(const _Loading());
+    try {
+      var newsList = await newsRepository.getNewsAboutTags(tag: event.tag);
+      emit(_Loaded(newsList: newsList));
+    } on DioException catch (e) {
+      emit(_Error(e: e.type));
+    }
+  }
+
+  _startApp(_Started event, Emitter<NewsListState> emit) async {
+    if (state is! _Loaded) {
+      emit(const _Loading());
+    }
+
+    try {
+      var newsList = await newsRepository.getNewsList();
+      emit(_Loaded(newsList: newsList));
+    } on DioException catch (e) {
+      emit(_Error(e: e.type));
+    } finally {
+      event.completer?.complete();
+    }
   }
 
   final InterfaceNewsRepository newsRepository;

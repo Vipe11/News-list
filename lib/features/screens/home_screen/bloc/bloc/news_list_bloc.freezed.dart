@@ -18,33 +18,39 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NewsListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(Completer<dynamic>? completer) started,
+    required TResult Function(String tag) searchFromTag,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(Completer<dynamic>? completer)? started,
+    TResult? Function(String tag)? searchFromTag,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(Completer<dynamic>? completer)? started,
+    TResult Function(String tag)? searchFromTag,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_SearchFromTag value) searchFromTag,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_SearchFromTag value)? searchFromTag,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_SearchFromTag value)? searchFromTag,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,6 +79,8 @@ abstract class _$$StartedImplCopyWith<$Res> {
   factory _$$StartedImplCopyWith(
           _$StartedImpl value, $Res Function(_$StartedImpl) then) =
       __$$StartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Completer<dynamic>? completer});
 }
 
 /// @nodoc
@@ -82,57 +90,87 @@ class __$$StartedImplCopyWithImpl<$Res>
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? completer = freezed,
+  }) {
+    return _then(_$StartedImpl(
+      completer: freezed == completer
+          ? _value.completer
+          : completer // ignore: cast_nullable_to_non_nullable
+              as Completer<dynamic>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
-  const _$StartedImpl();
+  const _$StartedImpl({this.completer});
+
+  @override
+  final Completer<dynamic>? completer;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewsListEvent.started()';
+    return 'NewsListEvent.started(completer: $completer)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'NewsListEvent.started'));
+    properties
+      ..add(DiagnosticsProperty('type', 'NewsListEvent.started'))
+      ..add(DiagnosticsProperty('completer', completer));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$StartedImpl &&
+            (identical(other.completer, completer) ||
+                other.completer == completer));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, completer);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
+      __$$StartedImplCopyWithImpl<_$StartedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(Completer<dynamic>? completer) started,
+    required TResult Function(String tag) searchFromTag,
   }) {
-    return started();
+    return started(completer);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(Completer<dynamic>? completer)? started,
+    TResult? Function(String tag)? searchFromTag,
   }) {
-    return started?.call();
+    return started?.call(completer);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(Completer<dynamic>? completer)? started,
+    TResult Function(String tag)? searchFromTag,
     required TResult orElse(),
   }) {
     if (started != null) {
-      return started();
+      return started(completer);
     }
     return orElse();
   }
@@ -141,6 +179,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_SearchFromTag value) searchFromTag,
   }) {
     return started(this);
   }
@@ -149,6 +188,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_SearchFromTag value)? searchFromTag,
   }) {
     return started?.call(this);
   }
@@ -157,6 +197,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_SearchFromTag value)? searchFromTag,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -167,7 +208,156 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
 }
 
 abstract class _Started implements NewsListEvent {
-  const factory _Started() = _$StartedImpl;
+  const factory _Started({final Completer<dynamic>? completer}) = _$StartedImpl;
+
+  Completer<dynamic>? get completer;
+  @JsonKey(ignore: true)
+  _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SearchFromTagImplCopyWith<$Res> {
+  factory _$$SearchFromTagImplCopyWith(
+          _$SearchFromTagImpl value, $Res Function(_$SearchFromTagImpl) then) =
+      __$$SearchFromTagImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String tag});
+}
+
+/// @nodoc
+class __$$SearchFromTagImplCopyWithImpl<$Res>
+    extends _$NewsListEventCopyWithImpl<$Res, _$SearchFromTagImpl>
+    implements _$$SearchFromTagImplCopyWith<$Res> {
+  __$$SearchFromTagImplCopyWithImpl(
+      _$SearchFromTagImpl _value, $Res Function(_$SearchFromTagImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tag = null,
+  }) {
+    return _then(_$SearchFromTagImpl(
+      tag: null == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SearchFromTagImpl
+    with DiagnosticableTreeMixin
+    implements _SearchFromTag {
+  const _$SearchFromTagImpl({required this.tag});
+
+  @override
+  final String tag;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NewsListEvent.searchFromTag(tag: $tag)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'NewsListEvent.searchFromTag'))
+      ..add(DiagnosticsProperty('tag', tag));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SearchFromTagImpl &&
+            (identical(other.tag, tag) || other.tag == tag));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, tag);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SearchFromTagImplCopyWith<_$SearchFromTagImpl> get copyWith =>
+      __$$SearchFromTagImplCopyWithImpl<_$SearchFromTagImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Completer<dynamic>? completer) started,
+    required TResult Function(String tag) searchFromTag,
+  }) {
+    return searchFromTag(tag);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Completer<dynamic>? completer)? started,
+    TResult? Function(String tag)? searchFromTag,
+  }) {
+    return searchFromTag?.call(tag);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Completer<dynamic>? completer)? started,
+    TResult Function(String tag)? searchFromTag,
+    required TResult orElse(),
+  }) {
+    if (searchFromTag != null) {
+      return searchFromTag(tag);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SearchFromTag value) searchFromTag,
+  }) {
+    return searchFromTag(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SearchFromTag value)? searchFromTag,
+  }) {
+    return searchFromTag?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SearchFromTag value)? searchFromTag,
+    required TResult orElse(),
+  }) {
+    if (searchFromTag != null) {
+      return searchFromTag(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchFromTag implements NewsListEvent {
+  const factory _SearchFromTag({required final String tag}) =
+      _$SearchFromTagImpl;
+
+  String get tag;
+  @JsonKey(ignore: true)
+  _$$SearchFromTagImplCopyWith<_$SearchFromTagImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -177,7 +367,7 @@ mixin _$NewsListState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<News> newsList) loaded,
-    required TResult Function() error,
+    required TResult Function(Object? e) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -185,7 +375,7 @@ mixin _$NewsListState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<News> newsList)? loaded,
-    TResult? Function()? error,
+    TResult? Function(Object? e)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -193,7 +383,7 @@ mixin _$NewsListState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<News> newsList)? loaded,
-    TResult Function()? error,
+    TResult Function(Object? e)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -289,7 +479,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<News> newsList) loaded,
-    required TResult Function() error,
+    required TResult Function(Object? e) error,
   }) {
     return initial();
   }
@@ -300,7 +490,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<News> newsList)? loaded,
-    TResult? Function()? error,
+    TResult? Function(Object? e)? error,
   }) {
     return initial?.call();
   }
@@ -311,7 +501,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<News> newsList)? loaded,
-    TResult Function()? error,
+    TResult Function(Object? e)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -409,7 +599,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<News> newsList) loaded,
-    required TResult Function() error,
+    required TResult Function(Object? e) error,
   }) {
     return loading();
   }
@@ -420,7 +610,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<News> newsList)? loaded,
-    TResult? Function()? error,
+    TResult? Function(Object? e)? error,
   }) {
     return loading?.call();
   }
@@ -431,7 +621,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<News> newsList)? loaded,
-    TResult Function()? error,
+    TResult Function(Object? e)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -564,7 +754,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<News> newsList) loaded,
-    required TResult Function() error,
+    required TResult Function(Object? e) error,
   }) {
     return loaded(newsList);
   }
@@ -575,7 +765,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<News> newsList)? loaded,
-    TResult? Function()? error,
+    TResult? Function(Object? e)? error,
   }) {
     return loaded?.call(newsList);
   }
@@ -586,7 +776,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<News> newsList)? loaded,
-    TResult Function()? error,
+    TResult Function(Object? e)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -647,6 +837,8 @@ abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Object? e});
 }
 
 /// @nodoc
@@ -656,32 +848,56 @@ class __$$ErrorImplCopyWithImpl<$Res>
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? e = freezed,
+  }) {
+    return _then(_$ErrorImpl(
+      e: freezed == e ? _value.e : e,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
-  const _$ErrorImpl();
+  const _$ErrorImpl({this.e});
+
+  @override
+  final Object? e;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewsListState.error()';
+    return 'NewsListState.error(e: $e)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'NewsListState.error'));
+    properties
+      ..add(DiagnosticsProperty('type', 'NewsListState.error'))
+      ..add(DiagnosticsProperty('e', e));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorImpl &&
+            const DeepCollectionEquality().equals(other.e, e));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -689,9 +905,9 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<News> newsList) loaded,
-    required TResult Function() error,
+    required TResult Function(Object? e) error,
   }) {
-    return error();
+    return error(e);
   }
 
   @override
@@ -700,9 +916,9 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<News> newsList)? loaded,
-    TResult? Function()? error,
+    TResult? Function(Object? e)? error,
   }) {
-    return error?.call();
+    return error?.call(e);
   }
 
   @override
@@ -711,11 +927,11 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<News> newsList)? loaded,
-    TResult Function()? error,
+    TResult Function(Object? e)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(e);
     }
     return orElse();
   }
@@ -759,5 +975,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
 }
 
 abstract class _Error implements NewsListState {
-  const factory _Error() = _$ErrorImpl;
+  const factory _Error({final Object? e}) = _$ErrorImpl;
+
+  Object? get e;
+  @JsonKey(ignore: true)
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

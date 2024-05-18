@@ -46,6 +46,7 @@ dependencies:
   build_runner: ^2.4.10
   build: ^2.4.1
   loading_animation_widget: ^1.2.1
+  photo_view: ^0.15.0
 
 dev_dependencies:
   flutter_test:

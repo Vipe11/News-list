@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_list/features/widgets/widgets.dart';
 import 'package:news_list/repositories/models/news.dart';
+import 'package:photo_view/photo_view.dart';
 
 class NewScreen extends StatelessWidget {
   const NewScreen({
@@ -37,10 +38,25 @@ class NewScreen extends StatelessWidget {
           ),
           if (news.multimedia.isNotEmpty) ...[
             const SizedBox(height: 20),
-            Image.network(
-              width: double.infinity,
-              fit: BoxFit.fill,
-              news.multimedia[2]['url'],
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => PhotoView(
+                    imageProvider: NetworkImage(news.multimedia[2]['url']),
+                    onTapUp: (context, details, controllerValue) =>
+                        Navigator.of(context).pop(),
+                    enableRotation: true,
+                    backgroundDecoration:
+                        const BoxDecoration(color: Colors.transparent),
+                  ),
+                );
+              },
+              child: Image.network(
+                width: double.infinity,
+                fit: BoxFit.fill,
+                news.multimedia[2]['url'],
+              ),
             ),
           ],
           const SizedBox(height: 20),

@@ -7,5 +7,5 @@ class NewsListState with _$NewsListState {
   const factory NewsListState.loaded({
     required List<News> newsList,
   }) = _Loaded;
-  const factory NewsListState.error() = _Error;
+  const factory NewsListState.error({Object? e}) = _Error;
 }
