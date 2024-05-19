@@ -7,9 +7,11 @@ class NewsListState with _$NewsListState {
   const factory NewsListState.loaded({
     required List<News> newsList,
     String? tag,
+    int? limit,
   }) = _Loaded;
   const factory NewsListState.error({
     Object? e,
     String? tag,
+    int? limit,
   }) = _Error;
 }

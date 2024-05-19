@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/features/screens/home_screen/bloc/bloc/news_list_bloc.dart';
@@ -48,31 +46,17 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) => const NewsContainerShimmer(),
               itemCount: 5,
             ),
-            loaded: (newsList, tag) {
-              return RefreshIndicator(
-                onRefresh: () async {
-                  final completer = Completer();
-                  context.read<NewsListBloc>().add(NewsListEvent.loadNews(
-                        completer: completer,
-                        showLoad: false,
-                        tag: tag,
-                      ));
-                  return completer.future;
-                },
-                child: ListView.separated(
-                  padding: const EdgeInsets.all(20),
-                  itemBuilder: (context, index) => NewsContainer(
-                    news: newsList[index],
-                  ),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
-                  itemCount: newsList.length,
-                ),
+            loaded: (newsList, tag, limit) {
+              return LoadedViewScreen(
+                newsList: newsList,
+                tag: tag,
+                limit: limit,
               );
             },
-            error: (e, tag) => ErrorLoadingView(
+            error: (e, tag, limit) => ErrorLoadingView(
               e: e,
               tag: tag,
+              limit: limit,
             ),
           );
         },

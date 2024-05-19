@@ -8,10 +8,12 @@ class ErrorLoadingView extends StatelessWidget {
     super.key,
     this.e,
     this.tag,
+    this.limit,
   });
 
   final Object? e;
   final String? tag;
+  final int? limit;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +42,11 @@ class ErrorLoadingView extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           TextButton(
-            onPressed: () => context
-                .read<NewsListBloc>()
-                .add(NewsListEvent.loadNews(tag: tag)),
+            onPressed: () =>
+                context.read<NewsListBloc>().add(NewsListEvent.loadNews(
+                      tag: tag,
+                      limit: limit,
+                    )),
             child: Text(
               'Повторить',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(

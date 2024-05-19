@@ -10,10 +10,12 @@ class NewsRepository implements InterfaceNewsRepository {
 
   final String host = 'https://api.nytimes.com/svc/news/v3/content';
   final String apiKey = 'KbtDtizOkvF5Aa3BkXDzpHNAzvkS6h5G';
+  final String limitPath = '&limit=';
 
   @override
-  Future<List<News>> getNewsList({String? tag}) async {
-    final response = await dio.get('$host/all/$tag.json?api-key=$apiKey');
+  Future<List<News>> getNewsList({String? tag, int? limit}) async {
+    final response = await dio
+        .get('$host/all/$tag.json?api-key=$apiKey$limitPath${limit ?? 20}');
 
     debugPrint('Запрос отправлен...');
 

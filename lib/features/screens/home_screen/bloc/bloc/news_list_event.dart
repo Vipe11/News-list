@@ -5,6 +5,7 @@ class NewsListEvent with _$NewsListEvent {
   const factory NewsListEvent.loadNews({
     Completer? completer,
     String? tag,
+    int? limit,
     @Default(true) bool showLoad,
   }) = _LoadNews;
 }
