@@ -1,16 +1,49 @@
 # news_list
 
-A new Flutter project.
+Пирложение для просмотра новостей.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+О приложении:
 
-A few resources to get you started if this is your first Flutter project:
+- В данном приложении есть три экрана, находятся в папке lib/fetaures/screens
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- В lib/features есть глобальные папки для widgets и bloc. Сделано это для использования их по всему приложению.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Темы вынесены в отдельный файл в папку themes
+
+- Для поиска был реализован NewsRepository с интерфесом
+
+
+### Список новостей
+
+Список новостей реализован с помощью ListView.separated. Был использован данный виджет, для помоещения между элементами дополнительных отступов.
+Список новостей можно найти в папке lib/features/screens/home_screen/view/home_screen.dart.
+
+### Изменение темы
+
+Изменение темы реальзовано с помощью Cubit. Код находится в lib/features/bloc/theme_cubit. Здесь не был использован пакет freezed, т.к. код не нуждается в генерации.
+
+В приложении реализовано две темы. При инициализации кубита по умолчанию стоит системная тема. Изменить тему можно в аппбаре приложения.
+
+### bloc + freezed
+
+Загрузка новостей сделана с помощью NewsListBloc (находится в lib/features/home_screen/bloc). Классы и эвенты были сгененрированны с помощью freezed
+
+### Загрузочное окно
+
+Загрузочное окно было реализовано с помощью пакета Shimmer, оно показывается при стейте _Loading
+
+### Splash screen
+
+Первым экраном открывается всегда Splash screen (lib/features/screens/splash_screen). В инит стейте данного виджета стоит таймер с задержкой 3 секунды, после происходит переход на главную.
+
+### Просмотр фото
+
+Для просмотра фото была использована библиотека PhotoView. Просмотреть фото можно на экране полного просмотра новости.
+
+### Поиск
+
+Поиск можно сделать в модальном окне, вызвать который можно через иконку поиска в AppBar.
+
+Можно сделать поиск через теги, или же самому прописать в окне поиска.

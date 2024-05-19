@@ -74,7 +74,7 @@ class _LoadedViewScreenState extends State<LoadedViewScreen> {
           if (index == widget.newsList.length) {
             return const Column(
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 CircularProgressIndicator(),
               ],
             );
