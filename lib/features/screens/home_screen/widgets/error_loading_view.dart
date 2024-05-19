@@ -7,9 +7,11 @@ class ErrorLoadingView extends StatelessWidget {
   const ErrorLoadingView({
     super.key,
     this.e,
+    this.tag,
   });
 
   final Object? e;
+  final String? tag;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +40,9 @@ class ErrorLoadingView extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           TextButton(
-            onPressed: () =>
-                context.read<NewsListBloc>().add(const NewsListEvent.loadNews()),
+            onPressed: () => context
+                .read<NewsListBloc>()
+                .add(NewsListEvent.loadNews(tag: tag)),
             child: Text(
               'Повторить',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(

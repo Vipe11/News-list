@@ -6,6 +6,10 @@ class NewsListState with _$NewsListState {
   const factory NewsListState.loading() = _Loading;
   const factory NewsListState.loaded({
     required List<News> newsList,
+    String? tag,
   }) = _Loaded;
-  const factory NewsListState.error({Object? e}) = _Error;
+  const factory NewsListState.error({
+    Object? e,
+    String? tag,
+  }) = _Error;
 }

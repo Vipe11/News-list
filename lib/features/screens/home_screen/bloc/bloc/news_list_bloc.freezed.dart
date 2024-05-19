@@ -283,24 +283,24 @@ mixin _$NewsListState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<News> newsList) loaded,
-    required TResult Function(Object? e) error,
+    required TResult Function(List<News> newsList, String? tag) loaded,
+    required TResult Function(Object? e, String? tag) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<News> newsList)? loaded,
-    TResult? Function(Object? e)? error,
+    TResult? Function(List<News> newsList, String? tag)? loaded,
+    TResult? Function(Object? e, String? tag)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<News> newsList)? loaded,
-    TResult Function(Object? e)? error,
+    TResult Function(List<News> newsList, String? tag)? loaded,
+    TResult Function(Object? e, String? tag)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -395,8 +395,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<News> newsList) loaded,
-    required TResult Function(Object? e) error,
+    required TResult Function(List<News> newsList, String? tag) loaded,
+    required TResult Function(Object? e, String? tag) error,
   }) {
     return initial();
   }
@@ -406,8 +406,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<News> newsList)? loaded,
-    TResult? Function(Object? e)? error,
+    TResult? Function(List<News> newsList, String? tag)? loaded,
+    TResult? Function(Object? e, String? tag)? error,
   }) {
     return initial?.call();
   }
@@ -417,8 +417,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<News> newsList)? loaded,
-    TResult Function(Object? e)? error,
+    TResult Function(List<News> newsList, String? tag)? loaded,
+    TResult Function(Object? e, String? tag)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -515,8 +515,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<News> newsList) loaded,
-    required TResult Function(Object? e) error,
+    required TResult Function(List<News> newsList, String? tag) loaded,
+    required TResult Function(Object? e, String? tag) error,
   }) {
     return loading();
   }
@@ -526,8 +526,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<News> newsList)? loaded,
-    TResult? Function(Object? e)? error,
+    TResult? Function(List<News> newsList, String? tag)? loaded,
+    TResult? Function(Object? e, String? tag)? error,
   }) {
     return loading?.call();
   }
@@ -537,8 +537,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<News> newsList)? loaded,
-    TResult Function(Object? e)? error,
+    TResult Function(List<News> newsList, String? tag)? loaded,
+    TResult Function(Object? e, String? tag)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -595,7 +595,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<News> newsList});
+  $Res call({List<News> newsList, String? tag});
 }
 
 /// @nodoc
@@ -610,12 +610,17 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? newsList = null,
+    Object? tag = freezed,
   }) {
     return _then(_$LoadedImpl(
       newsList: null == newsList
           ? _value._newsList
           : newsList // ignore: cast_nullable_to_non_nullable
               as List<News>,
+      tag: freezed == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -623,7 +628,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
-  const _$LoadedImpl({required final List<News> newsList})
+  const _$LoadedImpl({required final List<News> newsList, this.tag})
       : _newsList = newsList;
 
   final List<News> _newsList;
@@ -635,8 +640,11 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
   }
 
   @override
+  final String? tag;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewsListState.loaded(newsList: $newsList)';
+    return 'NewsListState.loaded(newsList: $newsList, tag: $tag)';
   }
 
   @override
@@ -644,7 +652,8 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NewsListState.loaded'))
-      ..add(DiagnosticsProperty('newsList', newsList));
+      ..add(DiagnosticsProperty('newsList', newsList))
+      ..add(DiagnosticsProperty('tag', tag));
   }
 
   @override
@@ -652,12 +661,13 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(other._newsList, _newsList));
+            const DeepCollectionEquality().equals(other._newsList, _newsList) &&
+            (identical(other.tag, tag) || other.tag == tag));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_newsList));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_newsList), tag);
 
   @JsonKey(ignore: true)
   @override
@@ -670,10 +680,10 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<News> newsList) loaded,
-    required TResult Function(Object? e) error,
+    required TResult Function(List<News> newsList, String? tag) loaded,
+    required TResult Function(Object? e, String? tag) error,
   }) {
-    return loaded(newsList);
+    return loaded(newsList, tag);
   }
 
   @override
@@ -681,10 +691,10 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<News> newsList)? loaded,
-    TResult? Function(Object? e)? error,
+    TResult? Function(List<News> newsList, String? tag)? loaded,
+    TResult? Function(Object? e, String? tag)? error,
   }) {
-    return loaded?.call(newsList);
+    return loaded?.call(newsList, tag);
   }
 
   @override
@@ -692,12 +702,12 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<News> newsList)? loaded,
-    TResult Function(Object? e)? error,
+    TResult Function(List<News> newsList, String? tag)? loaded,
+    TResult Function(Object? e, String? tag)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(newsList);
+      return loaded(newsList, tag);
     }
     return orElse();
   }
@@ -741,9 +751,11 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
 }
 
 abstract class _Loaded implements NewsListState {
-  const factory _Loaded({required final List<News> newsList}) = _$LoadedImpl;
+  const factory _Loaded(
+      {required final List<News> newsList, final String? tag}) = _$LoadedImpl;
 
   List<News> get newsList;
+  String? get tag;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -755,7 +767,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Object? e});
+  $Res call({Object? e, String? tag});
 }
 
 /// @nodoc
@@ -770,9 +782,14 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? e = freezed,
+    Object? tag = freezed,
   }) {
     return _then(_$ErrorImpl(
       e: freezed == e ? _value.e : e,
+      tag: freezed == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -780,14 +797,16 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
-  const _$ErrorImpl({this.e});
+  const _$ErrorImpl({this.e, this.tag});
 
   @override
   final Object? e;
+  @override
+  final String? tag;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewsListState.error(e: $e)';
+    return 'NewsListState.error(e: $e, tag: $tag)';
   }
 
   @override
@@ -795,7 +814,8 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NewsListState.error'))
-      ..add(DiagnosticsProperty('e', e));
+      ..add(DiagnosticsProperty('e', e))
+      ..add(DiagnosticsProperty('tag', tag));
   }
 
   @override
@@ -803,12 +823,13 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            const DeepCollectionEquality().equals(other.e, e));
+            const DeepCollectionEquality().equals(other.e, e) &&
+            (identical(other.tag, tag) || other.tag == tag));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(e), tag);
 
   @JsonKey(ignore: true)
   @override
@@ -821,10 +842,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<News> newsList) loaded,
-    required TResult Function(Object? e) error,
+    required TResult Function(List<News> newsList, String? tag) loaded,
+    required TResult Function(Object? e, String? tag) error,
   }) {
-    return error(e);
+    return error(e, tag);
   }
 
   @override
@@ -832,10 +853,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<News> newsList)? loaded,
-    TResult? Function(Object? e)? error,
+    TResult? Function(List<News> newsList, String? tag)? loaded,
+    TResult? Function(Object? e, String? tag)? error,
   }) {
-    return error?.call(e);
+    return error?.call(e, tag);
   }
 
   @override
@@ -843,12 +864,12 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<News> newsList)? loaded,
-    TResult Function(Object? e)? error,
+    TResult Function(List<News> newsList, String? tag)? loaded,
+    TResult Function(Object? e, String? tag)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(e);
+      return error(e, tag);
     }
     return orElse();
   }
@@ -892,9 +913,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
 }
 
 abstract class _Error implements NewsListState {
-  const factory _Error({final Object? e}) = _$ErrorImpl;
+  const factory _Error({final Object? e, final String? tag}) = _$ErrorImpl;
 
   Object? get e;
+  String? get tag;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;

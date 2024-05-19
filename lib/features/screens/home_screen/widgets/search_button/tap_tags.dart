@@ -10,6 +10,7 @@ class TapTagListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tags = [
+      'All',
       'World',
       'Style',
       'Food',

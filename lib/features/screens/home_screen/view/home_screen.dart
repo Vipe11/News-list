@@ -48,13 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) => const NewsContainerShimmer(),
               itemCount: 5,
             ),
-            loaded: (newsList) {
+            loaded: (newsList, tag) {
               return RefreshIndicator(
                 onRefresh: () async {
                   final completer = Completer();
                   context.read<NewsListBloc>().add(NewsListEvent.loadNews(
                         completer: completer,
                         showLoad: false,
+                        tag: tag,
                       ));
                   return completer.future;
                 },
@@ -69,7 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
-            error: (e) => ErrorLoadingView(e: e),
+            error: (e, tag) => ErrorLoadingView(
+              e: e,
+              tag: tag,
+            ),
           );
         },
       ),

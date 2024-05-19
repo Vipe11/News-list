@@ -23,9 +23,9 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
 
     try {
       var newsList = await newsRepository.getNewsList(tag: event.tag);
-      emit(_Loaded(newsList: newsList));
+      emit(_Loaded(newsList: newsList, tag: event.tag));
     } on DioException catch (e) {
-      emit(_Error(e: e.type));
+      emit(_Error(e: e.type, tag: event.tag));
     } finally {
       event.completer?.complete();
     }
