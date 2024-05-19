@@ -9,28 +9,13 @@ class NewsRepository implements InterfaceNewsRepository {
   final Dio dio;
 
   final String host = 'https://api.nytimes.com/svc/news/v3/content';
-  final String allNews = '/all/all.json?api-key=';
   final String apiKey = 'KbtDtizOkvF5Aa3BkXDzpHNAzvkS6h5G';
 
   @override
-  Future<List<News>> getNewsList() async {
-    final response = await dio.get('$host$allNews$apiKey');
+  Future<List<News>> getNewsList({String? tag}) async {
+    final response = await dio.get('$host/all/$tag.json?api-key=$apiKey');
 
     debugPrint('Запрос отправлен...');
-
-    final data = response.data;
-    final dataResults = data['results'] as List<dynamic>;
-
-    final newsList = [for (var i in dataResults) News.fromJson(i)];
-
-    return newsList;
-  }
-
-  @override
-  Future<List<News>> getNewsAboutTags({required String tag}) async {
-    final response = await dio.get('$host/nyt/$tag.json?api-key=$apiKey');
-
-    debugPrint('Запрос c тегом $tag отправлен...');
 
     final data = response.data;
     final dataResults = data['results'] as List<dynamic>;

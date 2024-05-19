@@ -21,7 +21,7 @@ class _SearchButtonState extends State<SearchButton> {
     void searchNewsWithTag() {
       if (controller.text.isNotEmpty) {
         context.read<NewsListBloc>().add(
-              NewsListEvent.searchFromTag(tag: controller.text),
+              NewsListEvent.loadNews(tag: controller.text),
             );
         Navigator.of(context).pop();
         controller.clear();

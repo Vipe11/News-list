@@ -16,43 +16,49 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NewsListEvent {
+  Completer<dynamic>? get completer => throw _privateConstructorUsedError;
+  String? get tag => throw _privateConstructorUsedError;
+  bool get showLoad => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Completer<dynamic>? completer) started,
-    required TResult Function(String tag) searchFromTag,
+    required TResult Function(
+            Completer<dynamic>? completer, String? tag, bool showLoad)
+        loadNews,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Completer<dynamic>? completer)? started,
-    TResult? Function(String tag)? searchFromTag,
+    TResult? Function(
+            Completer<dynamic>? completer, String? tag, bool showLoad)?
+        loadNews,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Completer<dynamic>? completer)? started,
-    TResult Function(String tag)? searchFromTag,
+    TResult Function(Completer<dynamic>? completer, String? tag, bool showLoad)?
+        loadNews,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_SearchFromTag value) searchFromTag,
+    required TResult Function(_LoadNews value) loadNews,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_SearchFromTag value)? searchFromTag,
+    TResult? Function(_LoadNews value)? loadNews,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_SearchFromTag value)? searchFromTag,
+    TResult Function(_LoadNews value)? loadNews,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $NewsListEventCopyWith<NewsListEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,6 +67,8 @@ abstract class $NewsListEventCopyWith<$Res> {
   factory $NewsListEventCopyWith(
           NewsListEvent value, $Res Function(NewsListEvent) then) =
       _$NewsListEventCopyWithImpl<$Res, NewsListEvent>;
+  @useResult
+  $Res call({Completer<dynamic>? completer, String? tag, bool showLoad});
 }
 
 /// @nodoc
@@ -72,105 +80,152 @@ class _$NewsListEventCopyWithImpl<$Res, $Val extends NewsListEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? completer = freezed,
+    Object? tag = freezed,
+    Object? showLoad = null,
+  }) {
+    return _then(_value.copyWith(
+      completer: freezed == completer
+          ? _value.completer
+          : completer // ignore: cast_nullable_to_non_nullable
+              as Completer<dynamic>?,
+      tag: freezed == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String?,
+      showLoad: null == showLoad
+          ? _value.showLoad
+          : showLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+abstract class _$$LoadNewsImplCopyWith<$Res>
+    implements $NewsListEventCopyWith<$Res> {
+  factory _$$LoadNewsImplCopyWith(
+          _$LoadNewsImpl value, $Res Function(_$LoadNewsImpl) then) =
+      __$$LoadNewsImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({Completer<dynamic>? completer});
+  $Res call({Completer<dynamic>? completer, String? tag, bool showLoad});
 }
 
 /// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$NewsListEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
+class __$$LoadNewsImplCopyWithImpl<$Res>
+    extends _$NewsListEventCopyWithImpl<$Res, _$LoadNewsImpl>
+    implements _$$LoadNewsImplCopyWith<$Res> {
+  __$$LoadNewsImplCopyWithImpl(
+      _$LoadNewsImpl _value, $Res Function(_$LoadNewsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? completer = freezed,
+    Object? tag = freezed,
+    Object? showLoad = null,
   }) {
-    return _then(_$StartedImpl(
+    return _then(_$LoadNewsImpl(
       completer: freezed == completer
           ? _value.completer
           : completer // ignore: cast_nullable_to_non_nullable
               as Completer<dynamic>?,
+      tag: freezed == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String?,
+      showLoad: null == showLoad
+          ? _value.showLoad
+          : showLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
-  const _$StartedImpl({this.completer});
+class _$LoadNewsImpl with DiagnosticableTreeMixin implements _LoadNews {
+  const _$LoadNewsImpl({this.completer, this.tag, this.showLoad = true});
 
   @override
   final Completer<dynamic>? completer;
+  @override
+  final String? tag;
+  @override
+  @JsonKey()
+  final bool showLoad;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewsListEvent.started(completer: $completer)';
+    return 'NewsListEvent.loadNews(completer: $completer, tag: $tag, showLoad: $showLoad)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'NewsListEvent.started'))
-      ..add(DiagnosticsProperty('completer', completer));
+      ..add(DiagnosticsProperty('type', 'NewsListEvent.loadNews'))
+      ..add(DiagnosticsProperty('completer', completer))
+      ..add(DiagnosticsProperty('tag', tag))
+      ..add(DiagnosticsProperty('showLoad', showLoad));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StartedImpl &&
+            other is _$LoadNewsImpl &&
             (identical(other.completer, completer) ||
-                other.completer == completer));
+                other.completer == completer) &&
+            (identical(other.tag, tag) || other.tag == tag) &&
+            (identical(other.showLoad, showLoad) ||
+                other.showLoad == showLoad));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, completer);
+  int get hashCode => Object.hash(runtimeType, completer, tag, showLoad);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
-      __$$StartedImplCopyWithImpl<_$StartedImpl>(this, _$identity);
+  _$$LoadNewsImplCopyWith<_$LoadNewsImpl> get copyWith =>
+      __$$LoadNewsImplCopyWithImpl<_$LoadNewsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Completer<dynamic>? completer) started,
-    required TResult Function(String tag) searchFromTag,
+    required TResult Function(
+            Completer<dynamic>? completer, String? tag, bool showLoad)
+        loadNews,
   }) {
-    return started(completer);
+    return loadNews(completer, tag, showLoad);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Completer<dynamic>? completer)? started,
-    TResult? Function(String tag)? searchFromTag,
+    TResult? Function(
+            Completer<dynamic>? completer, String? tag, bool showLoad)?
+        loadNews,
   }) {
-    return started?.call(completer);
+    return loadNews?.call(completer, tag, showLoad);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Completer<dynamic>? completer)? started,
-    TResult Function(String tag)? searchFromTag,
+    TResult Function(Completer<dynamic>? completer, String? tag, bool showLoad)?
+        loadNews,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(completer);
+    if (loadNews != null) {
+      return loadNews(completer, tag, showLoad);
     }
     return orElse();
   }
@@ -178,185 +233,47 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_SearchFromTag value) searchFromTag,
+    required TResult Function(_LoadNews value) loadNews,
   }) {
-    return started(this);
+    return loadNews(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_SearchFromTag value)? searchFromTag,
+    TResult? Function(_LoadNews value)? loadNews,
   }) {
-    return started?.call(this);
+    return loadNews?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_SearchFromTag value)? searchFromTag,
+    TResult Function(_LoadNews value)? loadNews,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (loadNews != null) {
+      return loadNews(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements NewsListEvent {
-  const factory _Started({final Completer<dynamic>? completer}) = _$StartedImpl;
+abstract class _LoadNews implements NewsListEvent {
+  const factory _LoadNews(
+      {final Completer<dynamic>? completer,
+      final String? tag,
+      final bool showLoad}) = _$LoadNewsImpl;
 
+  @override
   Completer<dynamic>? get completer;
+  @override
+  String? get tag;
+  @override
+  bool get showLoad;
+  @override
   @JsonKey(ignore: true)
-  _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SearchFromTagImplCopyWith<$Res> {
-  factory _$$SearchFromTagImplCopyWith(
-          _$SearchFromTagImpl value, $Res Function(_$SearchFromTagImpl) then) =
-      __$$SearchFromTagImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String tag});
-}
-
-/// @nodoc
-class __$$SearchFromTagImplCopyWithImpl<$Res>
-    extends _$NewsListEventCopyWithImpl<$Res, _$SearchFromTagImpl>
-    implements _$$SearchFromTagImplCopyWith<$Res> {
-  __$$SearchFromTagImplCopyWithImpl(
-      _$SearchFromTagImpl _value, $Res Function(_$SearchFromTagImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tag = null,
-  }) {
-    return _then(_$SearchFromTagImpl(
-      tag: null == tag
-          ? _value.tag
-          : tag // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SearchFromTagImpl
-    with DiagnosticableTreeMixin
-    implements _SearchFromTag {
-  const _$SearchFromTagImpl({required this.tag});
-
-  @override
-  final String tag;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewsListEvent.searchFromTag(tag: $tag)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'NewsListEvent.searchFromTag'))
-      ..add(DiagnosticsProperty('tag', tag));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SearchFromTagImpl &&
-            (identical(other.tag, tag) || other.tag == tag));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, tag);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SearchFromTagImplCopyWith<_$SearchFromTagImpl> get copyWith =>
-      __$$SearchFromTagImplCopyWithImpl<_$SearchFromTagImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Completer<dynamic>? completer) started,
-    required TResult Function(String tag) searchFromTag,
-  }) {
-    return searchFromTag(tag);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Completer<dynamic>? completer)? started,
-    TResult? Function(String tag)? searchFromTag,
-  }) {
-    return searchFromTag?.call(tag);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Completer<dynamic>? completer)? started,
-    TResult Function(String tag)? searchFromTag,
-    required TResult orElse(),
-  }) {
-    if (searchFromTag != null) {
-      return searchFromTag(tag);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_SearchFromTag value) searchFromTag,
-  }) {
-    return searchFromTag(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_SearchFromTag value)? searchFromTag,
-  }) {
-    return searchFromTag?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_SearchFromTag value)? searchFromTag,
-    required TResult orElse(),
-  }) {
-    if (searchFromTag != null) {
-      return searchFromTag(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SearchFromTag implements NewsListEvent {
-  const factory _SearchFromTag({required final String tag}) =
-      _$SearchFromTagImpl;
-
-  String get tag;
-  @JsonKey(ignore: true)
-  _$$SearchFromTagImplCopyWith<_$SearchFromTagImpl> get copyWith =>
+  _$$LoadNewsImplCopyWith<_$LoadNewsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

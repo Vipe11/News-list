@@ -45,7 +45,7 @@ class TapTags extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<NewsListBloc>().add(
-              NewsListEvent.searchFromTag(tag: tag),
+              NewsListEvent.loadNews(tag: tag),
             );
         Navigator.of(context).pop();
       },

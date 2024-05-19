@@ -39,7 +39,7 @@ class ErrorLoadingView extends StatelessWidget {
           ),
           TextButton(
             onPressed: () =>
-                context.read<NewsListBloc>().add(const NewsListEvent.started()),
+                context.read<NewsListBloc>().add(const NewsListEvent.loadNews()),
             child: Text(
               'Повторить',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(

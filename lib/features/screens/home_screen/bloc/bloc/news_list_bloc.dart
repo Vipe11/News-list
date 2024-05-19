@@ -13,27 +13,16 @@ part 'news_list_state.dart';
 
 class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
   NewsListBloc(this.newsRepository) : super(const _Initial()) {
-    on<_Started>(_startApp);
-    on<_SearchFromTag>(_serchFromTagApp);
+    on<_LoadNews>(_startLoad);
   }
 
-  _serchFromTagApp(_SearchFromTag event, Emitter<NewsListState> emit) async {
-    emit(const _Loading());
-    try {
-      var newsList = await newsRepository.getNewsAboutTags(tag: event.tag);
-      emit(_Loaded(newsList: newsList));
-    } on DioException catch (e) {
-      emit(_Error(e: e.type));
-    }
-  }
-
-  _startApp(_Started event, Emitter<NewsListState> emit) async {
-    if (state is! _Loaded) {
+  _startLoad(_LoadNews event, Emitter<NewsListState> emit) async {
+    if (event.showLoad) {
       emit(const _Loading());
     }
 
     try {
-      var newsList = await newsRepository.getNewsList();
+      var newsList = await newsRepository.getNewsList(tag: event.tag);
       emit(_Loaded(newsList: newsList));
     } on DioException catch (e) {
       emit(_Error(e: e.type));

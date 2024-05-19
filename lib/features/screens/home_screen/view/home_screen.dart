@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    context.read<NewsListBloc>().add(const NewsListEvent.started());
+    context.read<NewsListBloc>().add(const NewsListEvent.loadNews());
     super.initState();
   }
 
@@ -52,9 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
               return RefreshIndicator(
                 onRefresh: () async {
                   final completer = Completer();
-                  context
-                      .read<NewsListBloc>()
-                      .add(NewsListEvent.started(completer: completer));
+                  context.read<NewsListBloc>().add(NewsListEvent.loadNews(
+                        completer: completer,
+                        showLoad: false,
+                      ));
                   return completer.future;
                 },
                 child: ListView.separated(
