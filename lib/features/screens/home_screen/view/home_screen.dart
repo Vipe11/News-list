@@ -34,10 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocBuilder<NewsListBloc, NewsListState>(
         bloc: bloc,
         builder: (context, state) {
-          return state.when(
-            initial: () => const Center(
-              child: Text('Not init...'),
-            ),
+          return state.maybeWhen(
             loading: () => ListView.separated(
               padding: const EdgeInsets.all(20),
               separatorBuilder: (context, index) => const SizedBox(
@@ -57,6 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
               e: e,
               tag: tag,
               limit: limit,
+            ),
+            orElse: () => const Center(
+              child: CircularProgressIndicator(),
             ),
           );
         },

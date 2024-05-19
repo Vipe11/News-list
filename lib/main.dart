@@ -8,10 +8,12 @@ import 'package:news_list/repositories/news_repository/news_repository.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  ScrollController scrollController = ScrollController();
 
   GetIt.I.registerLazySingleton<InterfaceNewsRepository>(
     () => NewsRepository(dio: Dio()),
   );
+  GetIt.I.registerLazySingleton(() => scrollController);
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 

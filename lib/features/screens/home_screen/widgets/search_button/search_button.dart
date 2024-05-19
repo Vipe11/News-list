@@ -14,12 +14,14 @@ class SearchButton extends StatefulWidget {
 
 class _SearchButtonState extends State<SearchButton> {
   final TextEditingController controller = TextEditingController();
+  String currentTag = 'all';
 
   @override
   Widget build(BuildContext context) {
     // Search callback
     void searchNewsWithTag() {
-      if (controller.text.isNotEmpty) {
+      if (controller.text.isNotEmpty &&
+          controller.text.toLowerCase() != currentTag.toLowerCase()) {
         context.read<NewsListBloc>().add(
               NewsListEvent.loadNews(tag: controller.text),
             );
@@ -28,45 +30,58 @@ class _SearchButtonState extends State<SearchButton> {
       }
     }
 
-    return IconButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            showDragHandle: true,
-            isScrollControlled: true,
-            builder: (context) => Padding(
-              padding: EdgeInsets.only(
-                right: 20,
-                left: 20,
-                bottom: 20 + MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const TapTagListView(),
-                  const SizedBox(
-                    height: 10,
-                    width: double.infinity,
+    return BlocConsumer<NewsListBloc, NewsListState>(
+      listener: (context, state) {
+        state.maybeWhen(
+            loaded: (newsList, tag, limit) {
+              currentTag = tag ?? 'all';
+            },
+            orElse: () {});
+      },
+      builder: (context, state) {
+        return IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                showDragHandle: true,
+                isScrollControlled: true,
+                builder: (context) => Padding(
+                  padding: EdgeInsets.only(
+                    right: 20,
+                    left: 20,
+                    bottom: 20 + MediaQuery.of(context).viewInsets.bottom,
                   ),
-                  TextField(
-                    controller: controller,
-                    decoration: const InputDecoration(
-                      hintText: 'Type your search',
-                    ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TapTagListView(
+                        currentTag: currentTag,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                        width: double.infinity,
+                      ),
+                      TextField(
+                        controller: controller,
+                        decoration: const InputDecoration(
+                          hintText: 'Type your search',
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                          onPressed: () {
+                            searchNewsWithTag();
+                          },
+                          child: const Text('Search'))
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                      onPressed: () {
-                        searchNewsWithTag();
-                      },
-                      child: const Text('Search'))
-                ],
-              ),
-            ),
-          );
-        },
-        icon: const Icon(
-          Icons.search,
-        ));
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.search,
+            ));
+      },
+    );
   }
 }

@@ -5,7 +5,10 @@ import 'package:news_list/features/screens/home_screen/bloc/bloc/news_list_bloc.
 class TapTagListView extends StatelessWidget {
   const TapTagListView({
     super.key,
+    required this.currentTag,
   });
+
+  final String currentTag;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,7 @@ class TapTagListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => TapTags(
                 tag: tags[index],
+                currentTag: currentTag,
               ),
           separatorBuilder: (context, index) => const SizedBox(
                 width: 20,
@@ -37,17 +41,21 @@ class TapTags extends StatelessWidget {
   const TapTags({
     super.key,
     required this.tag,
+    required this.currentTag,
   });
 
   final String tag;
+  final String currentTag;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<NewsListBloc>().add(
-              NewsListEvent.loadNews(tag: tag),
-            );
+        if (tag != currentTag) {
+          context.read<NewsListBloc>().add(
+                NewsListEvent.loadNews(tag: tag),
+              );
+        }
         Navigator.of(context).pop();
       },
       child: Container(

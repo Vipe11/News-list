@@ -70,11 +70,21 @@ class _LoadedViewScreenState extends State<LoadedViewScreen> {
       child: ListView.separated(
         controller: scrollController,
         padding: const EdgeInsets.all(20),
-        itemBuilder: (context, index) => NewsContainer(
-          news: widget.newsList[index],
-        ),
+        itemBuilder: (context, index) {
+          if (index == widget.newsList.length) {
+            return const Column(
+              children: [
+                SizedBox(height: 20),
+                CircularProgressIndicator(),
+              ],
+            );
+          }
+          return NewsContainer(
+            news: widget.newsList[index],
+          );
+        },
         separatorBuilder: (context, index) => const SizedBox(height: 10),
-        itemCount: widget.newsList.length,
+        itemCount: widget.newsList.length + 1,
       ),
     );
   }
